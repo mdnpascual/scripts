@@ -52,7 +52,6 @@ set ip=%ip:~1%
 echo %ip%>> logfile.txt
 
 ::MAC Address
-@echo off
 for /f "tokens=2 delims=:" %%M in ('ipconfig /all^| find "Physical Address"') do (
   echo %%M >> 123.txt
 )
