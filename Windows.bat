@@ -1,4 +1,5 @@
-SETLOCAL ENABLEDELAYEDEXPANSION
+@ECHO OFF
+SetLocal EnableDelayedExpansion
 
 ::Serial number
 for /f "delims== skip=1" %%A IN ('wmic bios get serialnumber') DO if not defined line set "line=%%A"
@@ -79,7 +80,7 @@ echo !line:~1!>> 345.txt
 set "OldString2= "
 set "NewString2="
 for %%y in (345.txt) do call:process2 "%%~y"
-goto:eof 
+GOTO :EOF
 :process2
 (for /f "skip=2 delims=" %%b in ('find /n /v "" "%~1"') do (  
     set "ln=%%b"  
@@ -98,7 +99,20 @@ DEL 345.txt
 ::Hostname
 FOR /F "usebackq" %%O IN (`hostname`) DO SET MYVAR=%%O
 ECHO %MYVAR%>> logfile.txt
+
+::Monitor
+SET /a counter=1
+
+for /f "delims=€ skip=3" %%P IN ('cscript monitor.vbs %MYVAR%') DO (
+set /a "testcond=counter%%9"
+if "!testcond!"=="5" echo %%P >> logfile.txt
+if "!testcond!"=="6" echo %%P >> logfile.txt
+set /a counter+=1
+)
+cscript monitor.vbs %MYVAR% >> logfile2.txt
+
 ECHO ------------------------------------------------------ >> logfile.txt
+GOTO :EOF
 
 ::trim test
 ::@ECHO OFF
@@ -118,4 +132,3 @@ GOTO :EOF
 :TRIMSUB
 set tempvar=%*
 GOTO :EOF
-
