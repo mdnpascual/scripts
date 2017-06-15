@@ -52,6 +52,7 @@ set ip=%ip:~1%
 echo %ip%>> logfile.txt
 
 ::MAC Address
+@echo off
 for /f "tokens=2 delims=:" %%M in ('ipconfig /all^| find "Physical Address"') do (
   echo %%M >> 123.txt
 )
@@ -100,15 +101,16 @@ FOR /F "usebackq" %%O IN (`hostname`) DO SET MYVAR=%%O
 ECHO %MYVAR%>> logfile.txt
 
 ::Monitor
-SET /a counter=1
-
-for /f "delims=€ skip=3" %%P IN ('cscript monitor.vbs %MYVAR%') DO (
-set /a "testcond=counter%%9"
-if "!testcond!"=="5" echo %%P >> logfile.txt
-if "!testcond!"=="6" echo %%P >> logfile.txt
-set /a counter+=1
-)
+cscript monitor.vbs %MYVAR% >> 456.txt
+find "EDID_SerialNumber=" 456.txt >> 567.txt
+find "EDID_ModelName=" 456.txt >> 678.txt
+for /f "delims=€ skip=2" %%P IN (678.txt) DO ECHO %%P >> logfile.txt
+for /f "delims=€ skip=2" %%Q IN (567.txt) DO ECHO %%Q >> logfile.txt
 cscript monitor.vbs %MYVAR% >> logfile2.txt
+
+del 456.txt
+del 567.txt
+del 678.txt
 
 ECHO ------------------------------------------------------ >> logfile.txt
 GOTO :EOF
