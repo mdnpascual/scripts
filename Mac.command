@@ -42,10 +42,16 @@ do
 	indexer=`ifconfig | grep -n "${element}" | awk '{print $1}' | sed 's/.$//'`
 	num=$(($indexer - 2))
 	num2=$(($indexer + 2))
+	num3=$(($indexer - 2))
+	num4=$(($indexer + 2))
 	echo `ifconfig | head -n $num | tail -n 1`
 	echo `ifconfig | head -n $num2 | tail -n 1`
+	echo `ifconfig | head -n $num3 | tail -n 1`
+	echo `ifconfig | head -n $num4 | tail -n 1`
 	ifconfig | head -n $num | tail -n 1 | awk '($1~"^eth"){print $2}' >> logfile3.txt
 	ifconfig | head -n $num2 | tail -n 1 | awk '($1~"^eth"){print $2}' >> logfile3.txt
+	ifconfig | head -n $num3 | tail -n 1 | awk '($1~"^eth"){print $2}' >> logfile3.txt
+	ifconfig | head -n $num4 | tail -n 1 | awk '($1~"^eth"){print $2}' >> logfile3.txt
 done
 printf -- "\\r\n" >> logfile3.txt
 #host name
