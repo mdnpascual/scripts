@@ -57,10 +57,16 @@ do
 	indexer=`ifconfig | grep -n "${element}" | awk '{print $1}' | sed 's/.$//'`
 	num=$(($indexer - 2))
 	num2=$(($indexer + 2))
+	num3=$(($indexer - 1))
+	num4=$(($indexer + 1))
 	echo `ifconfig | head -n $num | tail -n 1`
 	echo `ifconfig | head -n $num2 | tail -n 1`
+	echo `ifconfig | head -n $num3 | tail -n 1`
+	echo `ifconfig | head -n $num4 | tail -n 1`
 	ifconfig | head -n $num | tail -n 1 | awk '($1~"^eth"){print $2}' >> logfile2.txt
 	ifconfig | head -n $num2 | tail -n 1 | awk '($1~"^eth"){print $2}' >> logfile2.txt
+	ifconfig | head -n $num3 | tail -n 1 | awk '($1~"^eth"){print $2}' >> logfile2.txt
+	ifconfig | head -n $num4 | tail -n 1 | awk '($1~"^eth"){print $2}' >> logfile2.txt
 done
 printf -- "\\r\n" >> logfile2.txt
 
@@ -68,5 +74,9 @@ printf -- "\\r\n" >> logfile2.txt
 
 hostname >> logfile2.txt
 printf -- "\\r\n" >> logfile2.txt
+
+#Monitor
+cat Xorg.0.log | grep "Monitor name:" | awk '{ print substr($0, index($0,$6)) }' >> logfile2.txt
+cat Xorg.0.log | grep "Serial No:" | awk '{ print substr($0, index($0,$6)) }' >> logfile2.txt
 
 printf -- "------------------------------------------------------\r\n " >> logfile2.txt
