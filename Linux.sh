@@ -76,7 +76,7 @@ hostname >> logfile2.txt
 printf -- "\\r\n" >> logfile2.txt
 
 #Monitor
-cat Xorg.0.log | grep "Monitor name:" | awk '{ print substr($0, index($0,$6)) }' >> logfile2.txt
-cat Xorg.0.log | grep "Serial No:" | awk '{ print substr($0, index($0,$6)) }' >> logfile2.txt
+cat /var/log/Xorg.0.log | grep "Monitor name:" | awk '{ print substr($0, index($0,$6)) }' >> logfile2.txt
+cat /var/log/Xorg.0.log | grep "Serial No:" | awk '{ print substr($0, index($0,$6)) }' >> logfile2.txt
 
 printf -- "------------------------------------------------------\r\n " >> logfile2.txt
