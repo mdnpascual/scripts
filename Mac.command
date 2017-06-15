@@ -57,4 +57,11 @@ printf -- "\\r\n" >> logfile3.txt
 #host name
 uname -n >> logfile3.txt
 printf -- "\\r\n" >> logfile3.txt
+#Monitor
+MIndex=`system_profiler SPDisplaysDataType | grep -n "^[[:space:]]\{6\}Displays:" | awk '{print $1}' | sed 's/.$//'`
+num5=$(($MIndex + 1))
+system_profiler SPDisplaysDataType | head -n 14 | tail -n 1 | awk '{print substr($0, index($0,$1)) }' | sed 's/.$//' >> logfile3.txt
+echo `system_profiler SPDisplaysDataType | head -n 14 | tail -n 1 | awk '{print substr($0, index($0,$1)) }' | sed 's/.$//'`
+system_profiler SPDisplaysDataType | grep "Display Serial Number:" | awk '{print substr($0, index($0,$4)) }' >> logfile3.txt
+echo `system_profiler SPDisplaysDataType | grep "Display Serial Number:" | awk '{print substr($0, index($0,$4)) }'`
 printf -- "------------------------------------------------------\r\n " >> logfile3.txt
