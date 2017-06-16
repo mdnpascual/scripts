@@ -50,7 +50,8 @@ printf -- "\\r\n" >> logfile2.txt
 #Mac Address
 #ifconfig em1 | grep ether | head -n 1 | awk '{print $2}' >> logfile2.txt
 #printf -- "\\r\n" >> logfile2.txt
-IPS=`ifconfig | grep inet | awk '{print $1 " " $2}' | grep "inet " | awk '($2!="127.0.0.1") && ($2!~"^192."){print $2}'`
+#IPS=`ifconfig | grep inet | awk '{print $1 " " $2}' | grep "inet " | awk '($2!="127.0.0.1") && ($2!~"^192."){print $2}'`
+IPS=`ifconfig | grep inet | awk '{print $1 " " $2}' | grep "inet " | awk '($2!="127.0.0.1") {print $2}'`
 IFS=$'\n' read -d '' -r -a arr <<< "$IPS"
 for element in "${arr[@]}"
 do
