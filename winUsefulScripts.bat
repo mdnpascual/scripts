@@ -10,3 +10,6 @@ robocopy <sourcepath> <destination path> /E /XO /XN
 
 //Copy new and updated files
 robocopy <sourcepath> <destination path> /E /XO
+
+Find what: (([^\n]*\n){x})[^\n]*\n - replace every nth line if you replace a by x - 1 
+Replace with: $1
