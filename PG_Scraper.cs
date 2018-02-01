@@ -123,7 +123,7 @@ namespace Padguide_Scrape
             List<List<String>> Schedule = CSV_Parser(path + "\\TBL_SCHEDULE.csv");
             List<List<String>> SubDungeon = CSV_Parser(path + "\\TBL_SUB_DUNGEON.csv");
             //Filtering stuff
-            List<List<String>> USonly = Schedule.Where(o => o[3] == "US").ToList();
+            List<List<String>> USonly = Schedule.Where(o => (o[3] == "US") && (o[2] == "0")).ToList();
             List<List<String>> ValidCloseTime = USonly.Where(o => DateTime.Parse(o[14], CultureInfo.CreateSpecificCulture("en-US")) > thisDay.AddDays(1)).ToList();
             List<List<String>> ValidOpenTime = ValidCloseTime.Where(o => DateTime.Parse(o[9], CultureInfo.CreateSpecificCulture("en-US")) < thisDay.AddDays(1)).ToList();
 
