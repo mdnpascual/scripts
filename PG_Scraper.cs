@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -47,12 +48,21 @@ namespace Padguide_Scrape
             i = 0;
             test = "[";
             List<List<String>> SkillID = CSV_Parser(path + "\\TBL_SKILL.csv");
+            List<List<String>> Rotation = CSV_Parser(path + "\\TBL_SKILL_ROTATION.csv");
             while (i < SkillID.Count)
             {
-                test += "{\"min_cooldown\":" +
-                SkillID[i][9] + ",\"effect\":\"nan\",\"max_cooldown\":" +
-                SkillID[i][10] + ",\"name\":\"" +
-                SkillID[i][0] + "\"},";
+                try
+                {
+                    test += "{\"min_cooldown\":" +
+                    SkillID[i][9] + ",\"effect\":\"nan\",\"max_cooldown\":" +
+                    SkillID[i][10] + ",\"name\":\"" +
+                    SkillID[i][0] + "\"},";
+                }
+                catch (Exception e)
+                {
+                    i++;
+                    continue;
+                }
                 i++;
             }
             test = test.Remove(test.Length - 1);
@@ -102,6 +112,54 @@ namespace Padguide_Scrape
             test = test.Remove(test.Length - 1);
             test += "}";
             File.WriteAllText(path + "\\evolutions.json", test);
+            
+            //Get schedule
+            i = 0;
+            test = "";
+            DateTime thisDay = DateTime.Today;
+            Console.WriteLine(thisDay.ToString("yyyy-MM-dd"));
+            List<List<String>> Dungeon = CSV_Parser(path + "\\TBL_DUNGEON.csv");
+            List<List<String>> DungeonMonster = CSV_Parser(path + "\\TBL_DUNGEON_MONSTER.csv");
+            List<List<String>> Schedule = CSV_Parser(path + "\\TBL_SCHEDULE.csv");
+            List<List<String>> SubDungeon = CSV_Parser(path + "\\TBL_SUB_DUNGEON.csv");
+            //Filtering stuff
+            List<List<String>> USonly = Schedule.Where(o => o[3] == "US").ToList();
+            List<List<String>> ValidCloseTime = USonly.Where(o => DateTime.Parse(o[14], CultureInfo.CreateSpecificCulture("en-US")) > thisDay.AddDays(1)).ToList();
+            List<List<String>> ValidOpenTime = ValidCloseTime.Where(o => DateTime.Parse(o[9], CultureInfo.CreateSpecificCulture("en-US")) < thisDay.AddDays(1)).ToList();
+
+            while (i < ValidOpenTime.Count)
+            {
+                String DungeonID = ValidOpenTime[i][1];
+                String DungeonName = Dungeon.Where(o => o[0] == DungeonID).ToList()[0][3];
+                List<List<String>> Difficulty = SubDungeon.Where(o => o[1] == DungeonID).ToList();
+                Difficulty = Difficulty.OrderByDescending(o => o[3]).ToList();
+                int j = 0;
+                while (j < Difficulty.Count)
+                {
+                    test += DungeonName + " Lvl." + Difficulty[j][3] + "::: ";
+                    List<List<String>> Drop = DungeonMonster.Where(o => (o[3] == Difficulty[j][0]) && (o[2] == DungeonID)).ToList();
+                    int k = 0;
+                    List<String> DropMons = new List<String>();
+                    while (k < Drop.Count)
+                    {
+                        DropMons.Add(Drop[k][11]);
+                        k++;
+                    }
+                    k = 0;
+                    DropMons = DropMons.Distinct().ToList();
+                    DropMons.Remove("0");
+                    while (k < DropMons.Count)
+                    {
+                        test += DropMons[k] + ",";
+                        k++;
+                    }
+                    test = test.Remove(test.Length - 1);
+                    test += "\r\n";
+                    j++;
+                }
+                i++;
+            }
+            File.WriteAllText(path + "\\Schedule.json", test);
         }
 
         private static string getMats(List<List<String>> EvoMat, string tv_seq)
@@ -168,7 +226,7 @@ namespace Padguide_Scrape
             while (!reader.EndOfStream)
             {
                 line = reader.ReadLine();
-                String[] values = line.Split(',');  //Delimiter
+                String[] values = line.Split('|');  //Delimiter
                 csv.Add(new List<String>());
 
                 int j = 0;
