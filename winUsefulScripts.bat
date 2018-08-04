@@ -16,3 +16,13 @@ Replace with: $1
 
 //Powershell admin
 Start-Process powershell -Verb runAs
+
+//Deploying firebase hosting
+
+  // IF NODE.JS IS NOT YET INSTALLED
+  npm install -g firebase-tools
+
+firebase login
+firebase init
+firebase list
+firebase deploy --project <Project_ID>
