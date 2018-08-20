@@ -13,6 +13,7 @@ robocopy <sourcepath> <destination path> /E /XO
 
 Find what: (([^\n]*\n){x})[^\n]*\n - replace every nth line if you replace a by x - 1 
 Replace with: $1
+Use if whole group: $0
 
 //Powershell admin
 Start-Process powershell -Verb runAs
