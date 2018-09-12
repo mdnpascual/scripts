@@ -6,3 +6,6 @@ awk 'BEGIN{ "ls -la /home/helcim/images/public/8/472/ | wc -l " | getline public
 
 // DEBUG  
 tail -f -n 30 /var/log/httpd/error_log
+
+// DEFEAT TERMINAL TMOUT
+while sleep 120; do printf '\33[0n'; done
