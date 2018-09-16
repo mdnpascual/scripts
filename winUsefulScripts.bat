@@ -27,3 +27,8 @@ firebase login
 firebase init
 firebase list
 firebase deploy --project <Project_ID>
+
+// UTorrent sequential downloading
+Press shift+F2 (hold them for the next step)
+Go to Options -> Preferences -> Advanced
+See uTorrent settings with opened parameters bt.sequential_download
