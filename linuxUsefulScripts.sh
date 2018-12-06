@@ -9,3 +9,6 @@ tail -f -n 30 /var/log/httpd/error_log
 
 // DEFEAT TERMINAL TMOUT
 while sleep 120; do printf '\33[0n'; done
+
+// FILTER PROCESSES ON TASK MANAGER
+top -d 0.1 -c -p $(pgrep -d',' -f PROCESS_NAME_TO_FILTER)
