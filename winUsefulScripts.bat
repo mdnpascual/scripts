@@ -32,3 +32,6 @@ firebase deploy --project <Project_ID>
 Press shift+F2 (hold them for the next step)
 Go to Options -> Preferences -> Advanced
 See uTorrent settings with opened parameters bt.sequential_download
+
+Butterflow command line:
+./butterflow -v -vs 1920:1080 -sw -r 4x input.mp4
