@@ -15,6 +15,14 @@ Find what: (([^\n]*\n){x})[^\n]*\n - replace every nth line if you replace a by 
 Replace with: $1
 Use if whole group: $0
 
+//Game keys regexes
+Only keys:
+Find what: ..*\t
+Replace with: [empty]
+Save to file:
+Find what: (\t)(.+)
+Replace With: :\r\n$2\r\n
+
 //Powershell admin
 Start-Process powershell -Verb runAs
 
