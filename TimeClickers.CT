@@ -1,0 +1,1064 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="26">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"Enable all"</Description>
+      <Options moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>3</ID>
+          <Description>"Fast Cursor Speed v3"</Description>
+          <LastState Activated="1"/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : TimeClickers.exe
+  Version: 
+  Date   : 2019-05-18
+  Author : MDuh
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscan(INJECT,D9 EE D9 58 08 C9 C3 00 00 00 68) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  fldz 
+  fstp dword ptr [eax+08]
+  mov [eax+20], (float)1800 // SET AUTO CURSOR SPEED TO 1000
+  jmp return
+
+INJECT:
+  jmp newmem
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db D9 EE D9 58 08
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 05D750D2
+
+""+5D750B4: 8B 45 08           -  mov eax,[ebp+08]
+""+5D750B7: 8B C8              -  mov ecx,eax
+""+5D750B9: 83 C1 44           -  add ecx,44
+""+5D750BC: 8B 55 0C           -  mov edx,[ebp+0C]
+""+5D750BF: 89 11              -  mov [ecx],edx
+""+5D750C1: 8B 55 10           -  mov edx,[ebp+10]
+""+5D750C4: 89 51 04           -  mov [ecx+04],edx
+""+5D750C7: 8B 55 14           -  mov edx,[ebp+14]
+""+5D750CA: 89 51 08           -  mov [ecx+08],edx
+""+5D750CD: 05 44 00 00 00     -  add eax,00000044
+// ---------- INJECTING HERE ----------
+""+5D750D2: D9 EE              -  fldz 
+""+5D750D4: D9 58 08           -  fstp dword ptr [eax+08]
+// ---------- DONE INJECTING  ----------
+""+5D750D7: C9                 -  leave 
+""+5D750D8: C3                 -  ret 
+""+5D750D9: 00 00              -  add [eax],al
+""+5D750DB: 00 68 C8           -  add [eax-38],ch
+""+5D750DE: 3C D0              -  cmp al,-30
+""+5D750E0: 0D E9 42 AF 9F     -  or eax,9FAF42E9
+""+5D750E5: FF 00              -  inc [eax]
+""+5D750E7: 00 55 8B           -  add [ebp-75],dl
+""+5D750EA: EC                 -  in al,dx
+""+5D750EB: 83 EC 18           -  sub esp,18
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>4</ID>
+          <Description>"Always Rainbow Cube"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : TimeClickers.exe
+  Version: 
+  Date   : 2019-05-18
+  Author : MDuh
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscan(alwaysrainbow,0F 97 C0 88 45 DF) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  seta al
+  mov eax, 1
+  mov [ebp-21],al
+  jmp return
+
+alwaysrainbow:
+  jmp newmem
+  nop
+return:
+registersymbol(alwaysrainbow)
+
+[DISABLE]
+
+alwaysrainbow:
+  db 0F 97 C0 88 45 DF
+
+unregistersymbol(alwaysrainbow)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 06320531
+
+""+6320510: 33 C0                 -  xor eax,eax
+""+6320512: EB 23                 -  jmp 06320537
+""+6320514: E8 DF 78 FE FF        -  call 06307DF8
+""+6320519: 8B 05 80 3D BC 05     -  mov eax,[05BC3D80]
+""+632051F: D9 80 28 01 00 00     -  fld dword ptr [eax+00000128]
+""+6320525: D9 5D D8              -  fstp dword ptr [ebp-28]
+""+6320528: D9 45 D8              -  fld dword ptr [ebp-28]
+""+632052B: 33 C0                 -  xor eax,eax
+""+632052D: DF F1                 -  fcomip st(0),st(1)
+""+632052F: DD D8                 -  fstp st(0)
+// ---------- INJECTING HERE ----------
+""+6320531: 0F 97 C0              -  seta al
+""+6320534: 88 45 DF              -  mov [ebp-21],al
+// ---------- DONE INJECTING  ----------
+""+6320537: C9                    -  leave 
+""+6320538: C3                    -  ret 
+""+6320539: 00 00                 -  add [eax],al
+""+632053B: 00 00                 -  add [eax],al
+""+632053D: 00 00                 -  add [eax],al
+""+632053F: 00 55 8B              -  add [ebp-75],dl
+""+6320542: EC                    -  in al,dx
+""+6320543: 83 EC 28              -  sub esp,28
+""+6320546: D9 45 0C              -  fld dword ptr [ebp+0C]
+""+6320549: D9 45 18              -  fld dword ptr [ebp+18]
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>7</ID>
+          <Description>"Rainbow Ball Minimum Time (~1min20sec)"</Description>
+          <LastState Activated="1"/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : TimeClickers.exe
+  Version: 
+  Date   : 2019-05-18
+  Author : MDuh
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscan(INJECT,DE C1 8B 45 08 D9 58 44) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  fldz
+  fmulp
+  fld1
+
+  //fld1
+  //faddp
+  //fld1
+  //fld1
+  //faddp
+  //fmulp
+  //fld1
+  //fld1
+  //faddp
+  //fmulp
+
+  faddp
+
+  faddp 
+  mov eax,[ebp+08]
+  jmp return
+
+INJECT:
+  jmp newmem
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db DE C1 8B 45 08
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 062D19C8
+
+""+62D19AE: C9                 -  leave 
+""+62D19AF: C3                 -  ret 
+""+62D19B0: 55                 -  push ebp
+""+62D19B1: 8B EC              -  mov ebp,esp
+""+62D19B3: 83 EC 08           -  sub esp,08
+""+62D19B6: E8 75 F3 F7 FF     -  call 06250D30
+""+62D19BB: DD 5D F8           -  fstp qword ptr [ebp-08]
+""+62D19BE: E8 1D 00 00 00     -  call 062D19E0
+""+62D19C3: DD 45 F8           -  fld qword ptr [ebp-08]
+""+62D19C6: D9 C9              -  fxch st(1)
+// ---------- INJECTING HERE ----------
+""+62D19C8: DE C1              -  faddp 
+""+62D19CA: 8B 45 08           -  mov eax,[ebp+08]
+// ---------- DONE INJECTING  ----------
+""+62D19CD: D9 58 44           -  fstp dword ptr [eax+44]
+""+62D19D0: C9                 -  leave 
+""+62D19D1: C3                 -  ret 
+""+62D19D2: 00 00              -  add [eax],al
+""+62D19D4: 68 C0 4D 1D 0B     -  push 0B1D4DC0
+""+62D19D9: E9 4A E6 9F FF     -  jmp 05CD0028
+""+62D19DE: 00 00              -  add [eax],al
+""+62D19E0: 55                 -  push ebp
+""+62D19E1: 8B EC              -  mov ebp,esp
+""+62D19E3: 83 EC 28           -  sub esp,28
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>8</ID>
+          <Description>"Auto Activate Skill After Boss Death (F10)"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : TimeClickers.exe
+  Version:
+  Date   : 2019-05-19
+  Author : MDuh
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+{$lua}
+function keystrokeTimerOnTimer3()
+  local ECX_value = readInteger('bossSuccess')
+  if ECX_value~=nil then
+    if ECX_value&gt;=1 then
+      doKeyPress(32)
+      doKeyPress(48)
+      doKeyPress(55)
+      writeInteger('bossSuccess', 0)
+    end
+  end
+end
+
+if keystrokeTimer3==nil then
+  keystrokeTimer3 = createTimer(nil,true)
+  keystrokeTimer3.Interval = 200
+end
+
+keystrokeTimer3.OnTimer = keystrokeTimerOnTimer3
+keystrokeTimer3.Enabled = true
+{$asm}
+
+aobscan(INJECT,C7 47 14 FF FF FF FF 89 45 B4 3D 02 00 00 00 ?? ?? ?? ?? ?? ?? 8B 4D B4 C1 E1 02 B8 ?? ?? ?? ?? 03 C1 8B 00 FF E0 8B 47 0C C6 80 A8 00 00 00 01 8B 47 0C 89 45 B0) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+label(bossSuccess)
+registersymbol(bossSuccess)
+
+newmem:
+
+code:
+  mov [bossSuccess],1
+  mov [edi+14],FFFFFFFF
+  jmp return
+
+bossSuccess:
+  dd 0
+
+INJECT:
+  jmp newmem
+  nop
+  nop
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db C7 47 14 FF FF FF FF
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 058D6FC5
+
+058D6FB0: C3                             -  ret
+058D6FB1: 00 00                          -  add [eax],al
+058D6FB3: 00 00                          -  add [eax],al
+058D6FB5: 00 00                          -  add [eax],al
+058D6FB7: 00 55 8B                       -  add [ebp-75],dl
+058D6FBA: EC                             -  in al,dx
+058D6FBB: 57                             -  push edi
+058D6FBC: 83 EC 64                       -  sub esp,64
+058D6FBF: 8B 7D 08                       -  mov edi,[ebp+08]
+058D6FC2: 8B 47 14                       -  mov eax,[edi+14]
+// ---------- INJECTING HERE ----------
+058D6FC5: C7 47 14 FF FF FF FF           -  mov [edi+14],FFFFFFFF
+// ---------- DONE INJECTING  ----------
+058D6FCC: 89 45 B4                       -  mov [ebp-4C],eax
+058D6FCF: 3D 02 00 00 00                 -  cmp eax,00000002
+058D6FD4: 0F 83 A8 01 00 00              -  jae &lt;FinishBossArena&gt;c__IteratorF:MoveNext+1ca
+058D6FDA: 8B 4D B4                       -  mov ecx,[ebp-4C]
+058D6FDD: C1 E1 02                       -  shl ecx,02
+058D6FE0: B8 B8 71 8D 05                 -  mov eax,058D71B8
+058D6FE5: 03 C1                          -  add eax,ecx
+058D6FE7: 8B 00                          -  mov eax,[eax]
+058D6FE9: FF E0                          -  jmp eax
+058D6FEB: 8B 47 0C                       -  mov eax,[edi+0C]
+}
+
+
+</AssemblerScript>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Toggle Activation</Action>
+              <Keys>
+                <Key>121</Key>
+              </Keys>
+              <ID>0</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>14</ID>
+          <Description>"Auto Activate Skill After Boss Fail (F11)"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : TimeClickers.exe
+  Version: 
+  Date   : 2019-05-20
+  Author : MDuh
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+{$lua}
+function keystrokeTimerOnTimer4()
+  local ECX_value = readInteger('bossFail')
+  if ECX_value~=nil then
+    if ECX_value&gt;=1 then
+      doKeyPress(32)
+      doKeyPress(48)
+      doKeyPress(55)
+      writeInteger('bossFail', 0)
+    end
+  end
+end
+
+if keystrokeTimer4==nil then
+  keystrokeTimer4 = createTimer(nil,true)
+  keystrokeTimer4.Interval = 200
+end
+
+keystrokeTimer4.OnTimer = keystrokeTimerOnTimer4
+keystrokeTimer4.Enabled = true
+{$asm}
+
+aobscan(INJECT,C7 47 10 FF FF FF FF 89 45 F8 3D 02 00 00 00 ?? ?? ?? ?? ?? ?? 8B 4D F8 C1 E1 02 B8 ?? ?? ?? ?? 03 C1 8B 00 FF E0 8B 47 0C C6 80 A8 00 00 00 01 8B 47 0C D9 EE D9 98 98 00 00 00 8B 47 0C C6 80 94 00 00 00 00 8B 47 0C 83 EC 0C 50) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+label(bossFail)
+registersymbol(bossFail)
+
+newmem:
+
+code:
+  mov [bossFail],1
+  mov [edi+10],FFFFFFFF
+  jmp return
+
+bossFail:
+  dd 0
+
+INJECT:
+  jmp newmem
+  nop
+  nop
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db C7 47 10 FF FF FF FF
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 05CB9F7D
+
+""+5CB9F69: C3                    -  ret 
+""+5CB9F6A: 00 00                 -  add [eax],al
+""+5CB9F6C: 00 00                 -  add [eax],al
+""+5CB9F6E: 00 00                 -  add [eax],al
+""+5CB9F70: 55                    -  push ebp
+""+5CB9F71: 8B EC                 -  mov ebp,esp
+""+5CB9F73: 57                    -  push edi
+""+5CB9F74: 83 EC 14              -  sub esp,14
+""+5CB9F77: 8B 7D 08              -  mov edi,[ebp+08]
+""+5CB9F7A: 8B 47 10              -  mov eax,[edi+10]
+// ---------- INJECTING HERE ----------
+""+5CB9F7D: C7 47 10 FF FF FF FF  -  mov [edi+10],FFFFFFFF
+// ---------- DONE INJECTING  ----------
+""+5CB9F84: 89 45 F8              -  mov [ebp-08],eax
+""+5CB9F87: 3D 02 00 00 00        -  cmp eax,00000002
+""+5CB9F8C: 0F 83 90 00 00 00     -  jae &lt;FailBossArena&gt;c__IteratorE:MoveNext+b2
+""+5CB9F92: 8B 4D F8              -  mov ecx,[ebp-08]
+""+5CB9F95: C1 E1 02              -  shl ecx,02
+""+5CB9F98: B8 40 A0 CB 05        -  mov eax,05CBA040
+""+5CB9F9D: 03 C1                 -  add eax,ecx
+""+5CB9F9F: 8B 00                 -  mov eax,[eax]
+""+5CB9FA1: FF E0                 -  jmp eax
+""+5CB9FA3: 8B 47 0C              -  mov eax,[edi+0C]
+}
+</AssemblerScript>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Toggle Activation</Action>
+              <Keys>
+                <Key>122</Key>
+              </Keys>
+              <ID>0</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10</ID>
+          <Description>"Auto Upgrade Weapons (F9)"</Description>
+          <Options moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : TimeClickers.exe
+  Version:
+  Date   : 2019-05-19
+  Author : MDuh
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+{$lua}
+function keystrokeTimerOnTimer()
+  local EAX_value = readInteger('upgrade_available')
+  local EDI_value = readInteger('hero_address')
+  local key_code = readInteger('key_code')
+  if EAX_value~=nil then
+    if EAX_value&gt;=1 then
+      --print(key_code)
+      if (key_code == 103) then --PARTICLE BALL
+        doKeyPress(71)
+      elseif (key_code == 102) then -- ROCKET LAUNCHER
+        doKeyPress(70)
+      elseif (key_code == 100) then -- SPREAD RIFLE
+        doKeyPress(68)
+      elseif (key_code == 97) then -- PULSE PISTOL
+        doKeyPress(65)
+      elseif (key_code == 115) then -- FLAK CANNON
+        doKeyPress(83)
+      end
+      writeInteger('upgrade_available', 0)
+    end
+  end
+end
+
+if keystrokeTimer==nil then
+  keystrokeTimer = createTimer(nil,true)
+  keystrokeTimer.Interval = 100
+end
+
+keystrokeTimer.OnTimer = keystrokeTimerOnTimer
+keystrokeTimer.Enabled = true
+{$asm}
+
+aobscan(INJECT,35 C6 87 E0 00 00 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+label(upgrade_available)
+registersymbol(upgrade_available)
+label(hero_address)
+registersymbol(hero_address)
+label(key_code)
+registersymbol(key_code)
+
+newmem:
+
+code:
+  mov [upgrade_available],eax
+  mov [hero_address],edi
+  push [edi+98]
+  pop [key_code]
+  mov byte ptr [edi+000000E0],00
+  jmp return
+
+upgrade_available:
+  dd 0
+hero_address:
+  dd 0
+key_code:
+  dd 0
+
+INJECT+01:
+  jmp newmem
+  nop
+  nop
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT+01:
+  db C6 87 E0 00 00 00 00
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 05AB94BC
+
+""+5AB949E: 81 EC 9C 00 00 00              -  sub esp,0000009C
+""+5AB94A4: 8B 7D 08                       -  mov edi,[ebp+08]
+""+5AB94A7: D9 EE                          -  fldz
+""+5AB94A9: DD 5D 80                       -  fstp qword ptr [ebp-80]
+""+5AB94AC: 83 EC 0C                       -  sub esp,0C
+""+5AB94AF: 57                             -  push edi
+""+5AB94B0: E8 F3 9E FF FF                 -  call Hero:UpgradeAvailable
+""+5AB94B5: 83 C4 10                       -  add esp,10
+""+5AB94B8: 85 C0                          -  test eax,eax
+""+5AB94BA: 74 35                          -  je Hero:RecalculateMaxPurchaseCount+59
+// ---------- INJECTING HERE ----------
+""+5AB94BC: C6 87 E0 00 00 00 00           -  mov byte ptr [edi+000000E0],00
+// ---------- DONE INJECTING  ----------
+""+5AB94C3: C6 87 E1 00 00 00 00           -  mov byte ptr [edi+000000E1],00
+""+5AB94CA: C6 87 E2 00 00 00 00           -  mov byte ptr [edi+000000E2],00
+""+5AB94D1: C6 87 E3 00 00 00 00           -  mov byte ptr [edi+000000E3],00
+""+5AB94D8: C7 87 E4 00 00 00 00 00 00 00  -  mov [edi+000000E4],00000000
+""+5AB94E2: C7 87 E8 00 00 00 01 00 00 00  -  mov [edi+000000E8],00000001
+""+5AB94EC: E9 82 03 00 00                 -  jmp Hero:RecalculateMaxPurchaseCount+3db
+""+5AB94F1: C7 87 E4 00 00 00 01 00 00 00  -  mov [edi+000000E4],00000001
+""+5AB94FB: C7 87 E8 00 00 00 00 00 00 00  -  mov [edi+000000E8],00000000
+""+5AB9505: 83 EC 0C                       -  sub esp,0C
+""+5AB9508: 57                             -  push edi
+}
+</AssemblerScript>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Toggle Activation</Action>
+              <Keys>
+                <Key>120</Key>
+              </Keys>
+              <ID>0</ID>
+            </Hotkey>
+          </Hotkeys>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>11</ID>
+              <Description>"Helper1 - Get Key"</Description>
+              <Options moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : TimeClickers.exe
+  Version: 
+  Date   : 2019-05-19
+  Author : MDuh
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscan(INJECT,8B C8 39 09 DD 80 B0 00 00 00 DD 5D F8) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+label(one)
+label(two)
+label(three)
+label(four)
+label(five)
+
+label(original)
+label(UIHero_address)
+registersymbol(UIHero_address)
+label(doneWeaponProcess)
+registersymbol(doneWeaponProcess)
+
+newmem:
+
+code:
+  //push [eax+98]
+  push eax //save
+  mov eax, [doneWeaponProcess]
+  cmp eax, 1
+  je one
+  cmp eax, 2
+  je two
+  cmp eax, 3
+  je three
+  cmp eax, 4
+  je four
+  cmp eax, 5
+  je five
+one:
+  push #103
+  jmp original
+two:
+  push #102
+  jmp original
+three:
+  push #100
+  jmp original
+four:
+  push #115
+  jmp original
+five:
+  push #97
+original:
+  pop [UIHero_address]
+  pop eax //restore
+  mov ecx,eax
+  cmp [ecx],ecx
+  fld qword ptr [eax+000000B0]
+  jmp return
+  nop
+  nop
+
+UIHero_address:
+  dd 0
+doneWeaponProcess:
+  dd 1
+
+INJECT:
+  jmp newmem
+  nop
+  nop
+  nop
+  nop
+  nop
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db 8B C8 39 09 DD 80 B0 00 00 00
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 060C5A8D
+
+""+60C5A74: C9                 -  leave 
+""+60C5A75: C3                 -  ret 
+""+60C5A76: 00 00              -  add [eax],al
+""+60C5A78: 55                 -  push ebp
+""+60C5A79: 8B EC              -  mov ebp,esp
+""+60C5A7B: 83 EC 18           -  sub esp,18
+""+60C5A7E: 8B 45 08           -  mov eax,[ebp+08]
+""+60C5A81: 8B 48 24           -  mov ecx,[eax+24]
+""+60C5A84: 89 4D F4           -  mov [ebp-0C],ecx
+""+60C5A87: 8B 80 80 00 00 00  -  mov eax,[eax+00000080]
+// ---------- INJECTING HERE ----------
+""+60C5A8D: 8B C8              -  mov ecx,eax
+""+60C5A8F: 39 09              -  cmp [ecx],ecx
+""+60C5A91: DD 80 B0 00 00 00  -  fld qword ptr [eax+000000B0]
+// ---------- DONE INJECTING  ----------
+""+60C5A97: DD 5D F8           -  fstp qword ptr [ebp-08]
+""+60C5A9A: DD 45 F8           -  fld qword ptr [ebp-08]
+""+60C5A9D: 83 EC 08           -  sub esp,08
+""+60C5AA0: 83 EC 08           -  sub esp,08
+""+60C5AA3: DD 1C 24           -  fstp qword ptr [esp]
+""+60C5AA6: E8 9D 3E FD FF     -  call GoldBank:CanAfford
+""+60C5AAB: 83 C4 10           -  add esp,10
+""+60C5AAE: 8B C8              -  mov ecx,eax
+""+60C5AB0: 8B 45 F4           -  mov eax,[ebp-0C]
+""+60C5AB3: 83 EC 08           -  sub esp,08
+}
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>12</ID>
+                  <Description>"Helper2 - Level weapon"</Description>
+                  <LastState/>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>{ Game   : TimeClickers.exe
+  Version: 
+  Date   : 2019-05-19
+  Author : MDuh
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+{$lua}
+function keystrokeTimerOnTimer2()
+  local level_available = readInteger('level_available')
+  local key_code = readInteger('doneWeaponProcess')
+  if level_available~=nil then
+    if level_available&gt;=1 then
+      --print(key_code)
+      if (key_code == 1) then --PARTICLE BALL
+        doKeyPress(71)
+        writeInteger('doneWeaponProcess', 2)
+      elseif (key_code == 2) then -- ROCKET LAUNCHER
+        doKeyPress(70)
+        writeInteger('doneWeaponProcess', 3)
+      elseif (key_code == 3) then -- SPREAD RIFLE
+        doKeyPress(68)
+        writeInteger('doneWeaponProcess', 4)
+      elseif (key_code == 4) then -- FLAK CANNON
+        doKeyPress(83)
+        writeInteger('doneWeaponProcess', 5)
+      elseif (key_code == 5) then -- PULSE PISTOL
+        doKeyPress(65)
+        writeInteger('doneWeaponProcess', 1)
+      end
+      writeInteger('level_available', 0)
+    end
+  end
+end
+
+if keystrokeTimer2==nil then
+  keystrokeTimer2 = createTimer(nil,true)
+  keystrokeTimer2.Interval = 1
+end
+
+keystrokeTimer2.OnTimer = keystrokeTimerOnTimer2
+keystrokeTimer2.Enabled = true
+{$asm}
+
+aobscan(INJECT,90 DD 5D F8 DD 45 F8 83 EC 08 83 EC 08 DD 1C 24 E8 ?? ?? ?? ?? 83 C4 10 8B C8 8B 45 F4 83 EC 08 51 50 39 00 E8) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+label(level_available)
+registersymbol(level_available)
+
+newmem:
+
+code:
+  mov [level_available],eax
+  add esp,10
+  mov ecx,eax
+  jmp return
+
+level_available:
+  dd 0
+
+INJECT+15:
+  jmp newmem
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT+15:
+  db 83 C4 10 8B C8
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 05972C83
+
+""+5972C6B: 90                 -  nop 
+""+5972C6C: 90                 -  nop 
+""+5972C6D: 90                 -  nop 
+""+5972C6E: 90                 -  nop 
+""+5972C6F: DD 5D F8           -  fstp qword ptr [ebp-08]
+""+5972C72: DD 45 F8           -  fld qword ptr [ebp-08]
+""+5972C75: 83 EC 08           -  sub esp,08
+""+5972C78: 83 EC 08           -  sub esp,08
+""+5972C7B: DD 1C 24           -  fstp qword ptr [esp]
+""+5972C7E: E8 C5 6C FD FF     -  call GoldBank:CanAfford
+// ---------- INJECTING HERE ----------
+""+5972C83: 83 C4 10           -  add esp,10
+""+5972C86: 8B C8              -  mov ecx,eax
+// ---------- DONE INJECTING  ----------
+""+5972C88: 8B 45 F4           -  mov eax,[ebp-0C]
+""+5972C8B: 83 EC 08           -  sub esp,08
+""+5972C8E: 51                 -  push ecx
+""+5972C8F: 50                 -  push eax
+""+5972C90: 39 00              -  cmp [eax],eax
+""+5972C92: E8 D9 27 FE FF     -  call UnityEngine.UI:Selectable:set_interactable
+""+5972C97: 83 C4 10           -  add esp,10
+""+5972C9A: C9                 -  leave 
+""+5972C9B: C3                 -  ret 
+""+5972C9C: 00 00              -  add [eax],al
+}
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17</ID>
+      <Description>"Minimum buy"</Description>
+      <Options moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : TimeClickers.exe
+  Version: 
+  Date   : 2019-06-01
+  Author : MDuh
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscan(INJECT,DE C1 DD 9F B0 00 00 00 83 45 C4) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  fstp st(0)
+  fstp st(0)
+  fstp st(0)
+  fld1
+
+  //fldz
+  //fmulp
+  //fmulp
+
+  //fld1
+  //faddp
+
+  fstp qword ptr [edi+000000B0]
+  jmp return
+
+INJECT:
+  jmp newmem
+  nop
+  nop
+  nop
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db DE C1 DD 9F B0 00 00 00
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 058DBA8D
+
+""+58DBA6E: DD 5D B8              -  fstp qword ptr [ebp-48]
+""+58DBA71: 8B 87 9C 00 00 00     -  mov eax,[edi+0000009C]
+""+58DBA77: 03 45 C4              -  add eax,[ebp-3C]
+""+58DBA7A: 83 EC 08              -  sub esp,08
+""+58DBA7D: 50                    -  push eax
+""+58DBA7E: 57                    -  push edi
+""+58DBA7F: E8 3C 01 00 00        -  call Hero:GetUpgrade
+""+58DBA84: 83 C4 10              -  add esp,10
+""+58DBA87: DD 45 B8              -  fld qword ptr [ebp-48]
+""+58DBA8A: DD 40 30              -  fld qword ptr [eax+30]
+// ---------- INJECTING HERE ----------
+""+58DBA8D: DE C1                 -  faddp 
+""+58DBA8F: DD 9F B0 00 00 00     -  fstp qword ptr [edi+000000B0]
+// ---------- DONE INJECTING  ----------
+""+58DBA95: 83 45 C4 01           -  add dword ptr [ebp-3C],01
+""+58DBA99: 8B 87 E8 00 00 00     -  mov eax,[edi+000000E8]
+""+58DBA9F: 39 45 C4              -  cmp [ebp-3C],eax
+""+58DBAA2: 7C C4                 -  jl Hero:RecalculateLevelUpCost+20
+""+58DBAA4: 8B 87 9C 00 00 00     -  mov eax,[edi+0000009C]
+""+58DBAAA: 83 EC 08              -  sub esp,08
+""+58DBAAD: 50                    -  push eax
+""+58DBAAE: 57                    -  push edi
+""+58DBAAF: E8 0C 01 00 00        -  call Hero:GetUpgrade
+""+58DBAB4: 83 C4 10              -  add esp,10
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>19</ID>
+          <Description>"Minimum buy 2 v2"</Description>
+          <LastState Activated="1"/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : TimeClickers.exe
+  Version: 
+  Date   : 2019-06-02
+  Author : MDuh
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscan(INJECT,DE C1 DD 9F B0 00 00 00 83 45 CC) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+
+  fstp st(0)
+  fstp st(0)
+  fstp st(0)
+  fld1
+
+  //fldz
+  //fmulp
+  //fmulp
+
+  //fld1
+  //faddp
+
+  fstp qword ptr [edi+000000B0]
+  jmp return
+
+INJECT:
+  jmp newmem
+  nop
+  nop
+  nop
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db DE C1 DD 9F B0 00 00 00
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 0631BA89
+
+""+631BA6B: DD 87 B0 00 00 00  -  fld qword ptr [edi+000000B0]
+""+631BA71: DD 5D B8           -  fstp qword ptr [ebp-48]
+""+631BA74: 83 EC 04           -  sub esp,04
+""+631BA77: 53                 -  push ebx
+""+631BA78: FF 75 C8           -  push [ebp-38]
+""+631BA7B: 57                 -  push edi
+""+631BA7C: E8 57 01 00 00     -  call 0631BBD8
+""+631BA81: 83 C4 10           -  add esp,10
+""+631BA84: DD 45 B8           -  fld qword ptr [ebp-48]
+""+631BA87: D9 C9              -  fxch st(1)
+// ---------- INJECTING HERE ----------
+""+631BA89: DE C1              -  faddp 
+""+631BA8B: DD 9F B0 00 00 00  -  fstp qword ptr [edi+000000B0]
+// ---------- DONE INJECTING  ----------
+""+631BA91: 83 45 CC 01        -  add dword ptr [ebp-34],01
+""+631BA95: 8B 87 E4 00 00 00  -  mov eax,[edi+000000E4]
+""+631BA9B: 39 45 CC           -  cmp [ebp-34],eax
+""+631BA9E: 0F 8C 44 FF FF FF  -  jl 0631B9E8
+""+631BAA4: 8D 65 F4           -  lea esp,[ebp-0C]
+""+631BAA7: 5E                 -  pop esi
+""+631BAA8: 5F                 -  pop edi
+""+631BAA9: 5B                 -  pop ebx
+""+631BAAA: C9                 -  leave 
+""+631BAAB: C3                 -  ret 
+}
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Structures StructVersion="2">
+    <Structure Name="BoxEnemy.Static" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements/>
+    </Structure>
+    <Structure Name="BoxEnemy+EnemyType" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="8" Vartype="4 Bytes" Bytesize="4" Description="value__" DisplayMethod="Unsigned Integer"/>
+      </Elements>
+    </Structure>
+    <Structure Name="BoxEnemy+EnemyType.Static" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements/>
+    </Structure>
+    <Structure Name="BoxEnemy" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="16" Vartype="Pointer" Bytesize="4" Description="enemyColors" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="20" Vartype="Pointer" Bytesize="4" Description="goldPrefab" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="24" Vartype="Pointer" Bytesize="4" Description="timeCubePrefab" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="28" Vartype="Pointer" Bytesize="4" Description="weaponCubePrefab" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="32" Vartype="Pointer" Bytesize="4" Description="rainbowShader" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="36" Vartype="Pointer" Bytesize="4" Description="timeCubeShader" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="40" Vartype="Pointer" Bytesize="4" Description="weaponCubeTex" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="44" Vartype="Pointer" Bytesize="4" Description="geometryHealth" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="48" Vartype="Pointer" Bytesize="4" Description="OnDeath" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="52" Vartype="Pointer" Bytesize="4" Description="tc" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="56" Vartype="Double" Bytesize="8" Description="maxHealth" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="64" Vartype="Double" Bytesize="8" Description="health" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="72" Vartype="4 Bytes" Bytesize="4" Description="enemyType" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="76" Vartype="4 Bytes" Bytesize="4" Description="targetCount" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="80" Vartype="4 Bytes" Bytesize="4" Description="targetMask" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="84" Vartype="Float" Bytesize="4" Description="nextAllowdFlashTime" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="88" Vartype="4 Bytes" Bytesize="4" Description="timeCubeCount" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="92" Vartype="4 Bytes" Bytesize="4" Description="weaponCubeCount" DisplayMethod="Unsigned Integer"/>
+      </Elements>
+    </Structure>
+    <Structure Name="ClickCursor" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="128" Vartype="Pointer" Bytesize="4" Description="clickerPistol" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="132" Vartype="Pointer" Bytesize="4" Description="clickLauncher" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="136" Vartype="Pointer" Bytesize="4" Description="clickCannon" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="140" Vartype="Float" Bytesize="4" Description="maxDist" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="144" Vartype="4 Bytes" Bytesize="4" Description="hitboxMask" DisplayMethod="Unsigned Integer"/>
+      </Elements>
+    </Structure>
+    <Structure Name="ClickCursor.Static" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements/>
+    </Structure>
+  </Structures>
+</CheatTable>
