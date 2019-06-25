@@ -23,6 +23,12 @@ Save to file:
 Find what: (\t)(.+)
 Replace With: :\r\n$2\r\n
 
+//Gtuner Combo to XY Values
+Find what: (([^\n]*\n){2})[^\n]*\n 
+Replace with: $1
+Find what: (.+STICK_1_X, )(.+)(\)\;\n)(.+STICK_1_Y, )(.+)(\)\;\n) 
+Replace with: $2 $5\n
+
 //Powershell admin
 Start-Process powershell -Verb runAs
 
