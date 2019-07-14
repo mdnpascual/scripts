@@ -49,3 +49,6 @@ See uTorrent settings with opened parameters bt.sequential_download
 
 Butterflow command line:
 ./butterflow -v -vs 1920:1080 -sw -r 4x input.mp4
+
+Remove kijiji ads with stylish:
+div.top-feature, div.third-party {display:none!important}
