@@ -12,3 +12,6 @@ while sleep 120; do printf '\33[0n'; done
 
 // FILTER PROCESSES ON TASK MANAGER
 top -d 0.1 -c -p $(pgrep -d',' -f PROCESS_NAME_TO_FILTER)
+
+convert little endian to big endian
+dd conv=swab < infile > outfile
