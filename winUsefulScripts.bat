@@ -15,6 +15,14 @@ Find what: (([^\n]*\n){x})[^\n]*\n - replace every nth line if you replace a by 
 Replace with: $1
 Use if whole group: $0
 
+//Find Duplicates (Sorted)
+Find What: ^(.*)(\n\1)+$
+Replace with: $1
+
+//Filter Lines only with word
+Find What: (?!.*[WORDTOFINDHERE])^.*$
+Replace with: [empty]
+
 //Game keys regexes
 Only keys:
 Find what: ..*\t
