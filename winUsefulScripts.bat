@@ -29,7 +29,7 @@ Find what: ..*\t
 Replace with: [empty]
 Save to file:
 Find what: (\t)(.+)
-Replace With: :\r\n$2\r\n
+Replace With: \r\n$2\r\n
 
 //Gtuner Combo to XY Values
 Find what: (([^\n]*\n){2})[^\n]*\n 
