@@ -31,6 +31,9 @@ Save to file:
 Find what: (\t)(.+)
 Replace With: \r\n$2\r\n
 
+// COPY ONLY NEW FILES
+xcopy %SourceDir% %TargetDir% /i /d /y /e
+
 //Gtuner Combo to XY Values
 Find what: (([^\n]*\n){2})[^\n]*\n 
 Replace with: $1
