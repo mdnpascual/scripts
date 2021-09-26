@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"No Deduction"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : OPUS Echo of Starsong.exe
+  Version: 
+  Date   : 2021-09-22
+  Author : mdnpm
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscan(No_Deduct,2B C6 41 89 47 18 49) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  nop
+  mov [r15+18],eax
+  jmp return
+
+No_Deduct:
+  jmp newmem
+  nop
+return:
+registersymbol(No_Deduct)
+
+[DISABLE]
+
+No_Deduct:
+  db 2B C6 41 89 47 18
+
+unregistersymbol(No_Deduct)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 22AD136BD16
+
+22AD136BCF0: 48 63 40 40                    -  movsxd  rax,dword ptr [rax+40]
+22AD136BCF4: 48 63 4F 40                    -  movsxd  rcx,dword ptr [rdi+40]
+22AD136BCF8: 3B C1                          -  cmp eax,ecx
+22AD136BCFA: 0F 85 B5 00 00 00              -  jne 22AD136BDB5
+22AD136BD00: 49 63 47 18                    -  movsxd  rax,dword ptr [r15+18]
+22AD136BD04: 85 F6                          -  test esi,esi
+22AD136BD06: 7D 0A                          -  jnl 22AD136BD12
+22AD136BD08: 41 C7 47 18 00 00 00 00        -  mov [r15+18],00000000
+22AD136BD10: EB 0A                          -  jmp 22AD136BD1C
+22AD136BD12: 49 63 47 18                    -  movsxd  rax,dword ptr [r15+18]
+// ---------- INJECTING HERE ----------
+22AD136BD16: 2B C6                          -  sub eax,esi
+22AD136BD18: 41 89 47 18                    -  mov [r15+18],eax
+// ---------- DONE INJECTING  ----------
+22AD136BD1C: 49 63 47 18                    -  movsxd  rax,dword ptr [r15+18]
+22AD136BD20: 85 C0                          -  test eax,eax
+22AD136BD22: 0F 8F 63 00 00 00              -  jg 22AD136BD8B
+22AD136BD28: 48 8B 45 D0                    -  mov rax,[rbp-30]
+22AD136BD2C: 48 8B 40 18                    -  mov rax,[rax+18]
+22AD136BD30: 48 89 45 C8                    -  mov [rbp-38],rax
+22AD136BD34: 48 8B 45 D0                    -  mov rax,[rbp-30]
+22AD136BD38: 48 8B 08                       -  mov rcx,[rax]
+22AD136BD3B: 66 66 90                       -  nop 
+22AD136BD3E: 49 BB 30 23 04 F8 2A 02 00 00  -  mov r11,0000022AF8042330
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>18</ID>
+      <Description>"Win RNG Checks"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : OPUS Echo of Starsong.exe
+  Version: 
+  Date   : 2021-09-24
+  Author : mdnpm
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscan(WIN_RNG,89 06 48 89 8D 58 FF FF FF) // should be unique
+alloc(newmem,$1000,2AE36E674B2)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov eax, (int)14
+  mov [rsi],eax
+  mov [rbp-000000A8],rcx
+  jmp return
+
+WIN_RNG:
+  jmp newmem
+  nop 4
+return:
+registersymbol(WIN_RNG)
+
+[DISABLE]
+
+WIN_RNG:
+  db 89 06 48 89 8D 58 FF FF FF
+
+unregistersymbol(WIN_RNG)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 2AE36E674B2
+
+2AE36E67477: 48 8D AD 00 00 00 00           -  lea rbp,[rbp+00000000]
+2AE36E6747E: 49 BB 90 36 E6 36 AE 02 00 00  -  mov r11,000002AE36E63690
+2AE36E67488: 41 FF D3                       -  call r11
+2AE36E6748B: 48 89 85 08 FF FF FF           -  mov [rbp-000000F8],rax
+2AE36E67492: 48 8B 57 28                    -  mov rdx,[rdi+28]
+2AE36E67496: 48 8B 4D A0                    -  mov rcx,[rbp-60]
+2AE36E6749A: 48 8D 6D 00                    -  lea rbp,[rbp+00]
+2AE36E6749E: 49 BB 00 78 E6 36 AE 02 00 00  -  mov r11,000002AE36E67800
+2AE36E674A8: 41 FF D3                       -  call r11
+2AE36E674AB: 48 8B 8D 08 FF FF FF           -  mov rcx,[rbp-000000F8]
+// ---------- INJECTING HERE ----------
+2AE36E674B2: 89 06                          -  mov [rsi],eax
+2AE36E674B4: 48 89 8D 58 FF FF FF           -  mov [rbp-000000A8],rcx
+// ---------- DONE INJECTING  ----------
+2AE36E674BB: 03 C1                          -  add eax,ecx
+2AE36E674BD: 48 63 8F D4 00 00 00           -  movsxd  rcx,dword ptr [rdi+000000D4]
+2AE36E674C4: 3B C1                          -  cmp eax,ecx
+2AE36E674C6: 40 0F 9C C0                    -  setl al
+2AE36E674CA: 48 0F B6 C0                    -  movzx rax,al
+2AE36E674CE: 85 C0                          -  test eax,eax
+2AE36E674D0: 40 0F 94 C0                    -  sete al
+2AE36E674D4: 48 0F B6 C0                    -  movzx rax,al
+2AE36E674D8: 48 0F B6 C0                    -  movzx rax,al
+2AE36E674DC: 48 89 85 10 FF FF FF           -  mov [rbp-000000F0],rax
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>20</ID>
+      <Description>"Freeze_Timer"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : OPUS Echo of Starsong.exe
+  Version: 
+  Date   : 2021-09-26
+  Author : mdnpm
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscan(No_Timer,F2 0F 5C C1 F2 0F 5A E8 F3 0F 11 AE D4) // should be unique
+alloc(newmem,$1000,280AA2D194C)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  nop
+  cvtsd2ss xmm5,xmm0
+  jmp return
+
+No_Timer:
+  jmp newmem
+  nop 3
+return:
+registersymbol(No_Timer)
+
+[DISABLE]
+
+No_Timer:
+  db F2 0F 5C C1 F2 0F 5A E8
+
+unregistersymbol(No_Timer)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 280AA2D194C
+
+280AA2D1918: 48 85 C0                       -  test rax,rax
+280AA2D191B: 0F 84 A5 00 00 00              -  je 280AA2D19C6
+280AA2D1921: F3 0F 10 86 D4 00 00 00        -  movss xmm0,[rsi+000000D4]
+280AA2D1929: F3 0F 5A C0                    -  cvtss2sd xmm0,xmm0
+280AA2D192D: F2 0F 11 45 D8                 -  movsd [rbp-28],xmm0
+280AA2D1932: 48 8D 6D 00                    -  lea rbp,[rbp+00]
+280AA2D1936: 49 BB 70 2A C4 96 81 02 00 00  -  mov r11,0000028196C42A70
+280AA2D1940: 41 FF D3                       -  call r11
+280AA2D1943: F3 0F 5A C8                    -  cvtss2sd xmm1,xmm0
+280AA2D1947: F2 0F 10 45 D8                 -  movsd xmm0,[rbp-28]
+// ---------- INJECTING HERE ----------
+280AA2D194C: F2 0F 5C C1                    -  subsd xmm0,xmm1
+280AA2D1950: F2 0F 5A E8                    -  cvtsd2ss xmm5,xmm0
+// ---------- DONE INJECTING  ----------
+280AA2D1954: F3 0F 11 AE D4 00 00 00        -  movss [rsi+000000D4],xmm5
+280AA2D195C: F3 0F 10 86 D4 00 00 00        -  movss xmm0,[rsi+000000D4]
+280AA2D1964: F3 0F 5A C0                    -  cvtss2sd xmm0,xmm0
+280AA2D1968: F2 0F 5A C0                    -  cvtsd2ss xmm0,xmm0
+280AA2D196C: 66 90                          -  nop 
+280AA2D196E: 49 BB 20 98 5E 6F 82 02 00 00  -  mov r11,000002826F5E9820
+280AA2D1978: 41 FF D3                       -  call r11
+280AA2D197B: 48 8B F8                       -  mov rdi,rax
+280AA2D197E: 48 63 8E D0 00 00 00           -  movsxd  rcx,dword ptr [rsi+000000D0]
+280AA2D1985: 3B C1                          -  cmp eax,ecx
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Structures StructVersion="2">
+    <Structure Name="String" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="16" Vartype="4 Bytes" Bytesize="4" Description="Length" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="20" Vartype="Unicode String" Bytesize="128" Description="Value" DisplayMethod="Unsigned Integer"/>
+      </Elements>
+    </Structure>
+  </Structures>
+</CheatTable>
